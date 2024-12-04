@@ -8,6 +8,18 @@ ll Bigmod ( ll a,ll p,ll m ){
     }
     return res;
 }
+// div
+vector<ll> Divisors(ll n) {
+ vector<ll> divisors;
+    for (long long i = 1; i * i <= n; ++i) {
+        if (n % i == 0) {
+            divisors.push_back(i);
+            if (n / i != i)
+                divisors.push_back(n / i);
+        }
+    }
+    return divisors;
+}
 ll gcd(ll a,ll b){
     if (a == 0ll)    return b;
     return gcd(b % a, a);
