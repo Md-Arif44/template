@@ -59,6 +59,10 @@ template<class T>using  PQ1 =PQ<T,V<T>,greater<T>>;
 template<class T>using  PQ2 =PQ<T,V<pair<T,T>>,greater<pair<T,T>>>; 
 #define ss second 
 #define pb push_back
+#define to_str(x) (to_string(x))
+#define to_ll(x) (stoi(x))
+#define to_char(x) ((x)+'0')
+#define to_int(x) ((x)-'0')
 constexpr int Pct(int x){return __builtin_popcount(x);}  
 constexpr int Msb(int x){return x==0?0:31 -__builtin_clz(x);}  
 constexpr int P2(int x) { return 1 << x; }
