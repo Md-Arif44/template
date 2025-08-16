@@ -36,7 +36,7 @@ Dijkstra
         }
      
  Floyd Warshall
-  int n,m,q;
+  int n,m;
   vector<vector<ll>>dis(n,vector<ll>(n,inf));
   
   for(int i=0;i<n;i++)dis[i][i]=0;
