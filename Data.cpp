@@ -123,3 +123,22 @@ struct Queue {
   
   }
 };
+
+#include<bits/stdc++.h>
+using namespace std;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T>using ordered_set=tree<T, null_type, less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+template<class T>using ordered_multiset=tree<T, null_type,less_equal<T>, rb_tree_tag,tree_order_statistics_node_update>;
+
+/**
+ * PBDS Tips:
+ * - less<T>         : Sorted set (asc)
+ * - less_equal<T>   : Multiset (asc)
+ * - greater<T>      : Sorted set (desc)
+ * - greater_equal<T>: Multiset (desc)
+ *
+ * name.order_of_key(k)  -> Count of elements < k
+ * *name.find_by_order(k)-> k-th smallest element (0-indexed)
+*/
