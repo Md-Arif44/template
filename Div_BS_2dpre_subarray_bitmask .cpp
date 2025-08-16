@@ -54,6 +54,25 @@ vector<ll> Divisors(ll n) {
      else r=mid;
     }
 
+// bit mask  
+  auto f=[&](vector<ll>&a , ll x)-> ll{
+    
+     int64_t n=int(a.size()), v=0;
+
+     for (int mask=1;mask<(1<<n);mask++){
+       ll lc=1,cnt=0;
+           for(int i=0;i<n;i++){
+               if(mask&(1<<i)){
+                   pct++;
+                   lc*=a[i];
+               }
+           }
+
+        if(pct&1)v+=x/lc;
+        else v-=x/lc;
+     }
+     return x-v;
+   };
 
     
 vvl PrefixSums2D(vvl &a) {
