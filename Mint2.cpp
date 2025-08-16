@@ -1,6 +1,5 @@
-struct Mint{
-  //  static constexpr int  m = 998244353;
-  static constexpr int  m =int(1e9)+7;
+template< const int  m >
+ struct Mint{
   int x;
   Mint() : x(0){}
   Mint(long long x_):x(x_ % m){if (x < 0) x += m;}
@@ -23,4 +22,20 @@ struct Mint{
   friend bool operator!=(Mint a, Mint b){return a.x != b.x;}
   friend std::ostream &operator<<(std::ostream &os, Mint const &a) { return os << a.x; }
   friend std::istream& operator>>(std::istream &is, Mint& a) {is >> a.x;a.x%= m;if(a.x< 0)a.x+=m;return is;}
-};
+ };
+ // using mint = Mint< 998244353 > ;
+ using mint = Mint< int(1e9)+7 > ;
+ 
+ vector<mint> fact(1, 1);
+ vector<mint> inv_fact(1, 1);
+ 
+ mint C(int n, int k) {
+  if (k < 0 || k > n) return 0;
+  
+  while ((int) fact.size() < n + 1) {
+    fact.push_back(fact.back() * (int) fact.size());
+    inv_fact.push_back( mint(1) / fact.back());
+  }
+  return fact[n] * inv_fact[k] * inv_fact[n - k];
+
+}
