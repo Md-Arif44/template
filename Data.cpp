@@ -52,6 +52,30 @@ struct SparseTable {
     return func(mat[lg][from], mat[lg][to - (1 << lg) + 1]);
   }
 };
+
+struct Dsu{
+   vector<int>pa,sz;
+    Dsu(int n){ 
+      pa.resize(n);
+      sz=vector<int>(n,1);
+      iota(pa.begin(),pa.end(),0);
+    }
+    int get(int a){ 
+      return pa[a]=((pa[a]==a)?a:get(pa[a]));
+    }
+    bool add(int a,int b){
+       a=get(a),b=get(b);
+       if(a!=b){
+         if(sz[a]<sz[b])swap(a,b);
+          
+           sz[a]+=sz[b]; pa[b]=a; 
+        return true; 
+       }
+       else return false;
+    }
+};
+
+
 template <typename T, typename F>
 struct Queue {
   vector<T> pref;
