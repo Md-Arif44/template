@@ -1,3 +1,5 @@
+ 
+
 struct  Hash{
       int n;
       const ll p1=int(1e9+7),p2=int(1e9+9),b1=int(1e7+7) ,b2=int(1e7+11);
@@ -27,7 +29,8 @@ struct  Hash{
 };
 
 template <typename T> 
-vector<int> z_function(int n, const T &s) {
+vector<int> z_function(const T &s) {
+  int n= (int)s.size() ;
   vector<int> z(n, n);
   int l = 0, r = 0;
   for (int i = 1; i < n; i++) {
@@ -43,7 +46,19 @@ vector<int> z_function(int n, const T &s) {
   return z;
 }
 
-template <typename T> 
-vector<int> z_function(const T &s) {
-  return z_function((int) s.size(), s);
+template <typename T>
+vector<int> Kmp(const T &s) {
+  int n=(int)s.size() ;
+    vector<int> p(n, 0);
+      int k = 0;
+      for (int i = 1; i < n; i++) {
+        while (k > 0 && !(s[i] == s[k])) {    
+          k = p[k - 1];
+        }
+        if (s[i] == s[k]) {
+          k++;
+        }
+        p[i] = k;
+      }
+    return p;
 }
