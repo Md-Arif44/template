@@ -21,12 +21,12 @@
 };
  2D
  int n,m;
-       vector<vector<string>>  girid(n);
+       vector<string >  girid(n);
        vector level (n, vector<int>(m));
        map<pair<int,int> ,pair<int,int>>parant;
        vector<char>Direction;
       
-       auto is_valid=[&](int x,int y)-> bool { return x<n && y<m && girid[x][y]!='#'   ;};
+       auto is_valid=[&](int x,int y)-> bool { return x>=0 && y>=0 && x<n && y<m && girid[x][y]!='#'   ;};
    
         auto bfs=[&](pair<int ,int> s)-> void {
 
