@@ -70,14 +70,7 @@ struct graph{
   }
   void dfs_all() {
     for (int v = 0; v < n; v++) {
-      if (depth[v] == -1) {
-          ++attempt;
-          depth[v] = 0;
-          root[v] = v;
-          pa[v] = -1;
-          dfs(v);
-      
-      }
+       dfs_v(v);
     }
     assert((int) order.size() == n);
   }
@@ -87,9 +80,8 @@ struct graph{
   }
 
 };
-
-
 // dfs 
+
 struct Graph{
       int n,attempt=0;
       vector<vector<int>> g;
@@ -123,29 +115,72 @@ struct Graph{
   }
   void dfs_v(int v){
        if (pos[v] == -1) {
-          ++attempt;
-          dist[v] = 0;
-          root[v] = v;
-          pa[v] = -1;
+          ++attempt;dist[v] = 0;
+          root[v] = v;pa[v] = -1;
           dfs(v);
       }
   }
   void dfs_all() {
     for (int v = 0; v < n; v++) {
-      if (pos[v] == -1) {
-          ++attempt;
-          dist[v] = 0;
-          root[v] = v;
-          pa[v] = -1;
-          dfs(v);
-      
-      }
+         dfs_v(v);
     }
     assert((int) order.size() == n);
   }
   void add(int u,int v){
-         assert(u<n && v<n && u>=0 && v>=0);
+      assert(u<n && v<n && u>=0 && v>=0);
          g[u].push_back(v);
   }
+
+};
+// lca
+
+
+struct LCA{
+  int n ,Log;
+  vector<int> dis ;
+  vector<vector<int>>g,up;
+  LCA(int n):n(n){
+      Log=Msb(n) +1;
+      up.resize(n,vector<int>(Log)); 
+      g.assign(n,{}); dis.resize(n);
+  }
+  void dfs(int v,int pa){
+           up[v][0]=pa; 
+           for(int i=1;i<Log;i++){
+               if(dis[v]>= (1<<i)) up[v][i]=up[up[v][i-1]][i-1];
+           }
+           for(auto u: g[v]){
+             if(u==pa)continue ;
+               dis[u]=dis[v]+1;
+               dfs(u,v) ;
+           }
+
+  }
+  int lca(int u,int v){
+           if(dis[u]<dis[v])swap(u,v);
  
+           int k=dis[u]-dis[v] ;
+          for(int i=0;i<Log;i++){
+             if(k&(1<<i)){
+                 u=up[u][i];
+             }
+          }
+         if(u==v)return u ;
+          for(int i=Log-1;i>=0 ;i-- ){
+             if(up[u][i]!=up[v][i]){
+                u=up[u][i];
+                v=up[v][i];
+             }
+          }
+         return up[v][0];
+ 
+  }
+  void build(int root ){
+    dfs(root,0);
+  }
+  void add(int u,int v){
+      assert(u<n && v<n && u>=0 && v>=0);
+         g[u].push_back(v);
+  }
+
 };
