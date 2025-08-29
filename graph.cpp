@@ -87,3 +87,65 @@ struct graph{
   }
 
 };
+
+
+// dfs 
+struct Graph{
+      int n,attempt=0;
+      vector<vector<int>> g;
+      vector<int>pa,was,pos,end,order,root,sz,dist;
+     Graph (int _n):n(_n) {
+           assert(n>0); 
+           g.assign(n,{});      
+           pa.resize(n, -1);
+           pos.resize(n,-1);
+           end.resize(n,-1);
+           sz.resize(n, 0);
+           root.resize(n, -1);
+           dist.resize(n);
+           was.resize(n, -1);
+     }
+  void dfs(int v){
+    was[v] = attempt; 
+     pos[v]=int(order.size()) ;
+         order.push_back(v);
+         sz[v]=1;
+         for(auto to: g[v]){
+             if(pos[to]==-1){
+                pa[to]=v;
+                dist[to]=dist[v]+1;
+                root[to]=(root[v]!= -1?root[v] : to);
+                dfs(to);
+                sz[v]+=sz[to];
+             }
+         }
+      end[v]=int(order.size())-1 ;
+  }
+  void dfs_v(int v){
+       if (pos[v] == -1) {
+          ++attempt;
+          dist[v] = 0;
+          root[v] = v;
+          pa[v] = -1;
+          dfs(v);
+      }
+  }
+  void dfs_all() {
+    for (int v = 0; v < n; v++) {
+      if (pos[v] == -1) {
+          ++attempt;
+          dist[v] = 0;
+          root[v] = v;
+          pa[v] = -1;
+          dfs(v);
+      
+      }
+    }
+    assert((int) order.size() == n);
+  }
+  void add(int u,int v){
+         assert(u<n && v<n && u>=0 && v>=0);
+         g[u].push_back(v);
+  }
+ 
+};
