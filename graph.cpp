@@ -80,13 +80,13 @@ struct graph{
   }
 
 };
-// dfs 
-
+// dfs scc 
+ 
 struct Graph{
       int n,attempt=0;
       vector<vector<int>> g;
-      vector<int>pa,was,pos,end,order,root,sz,dist;
-     Graph (int _n):n(_n) {
+      vector<int>pa,was,pos,end,order,end_order, root,sz,dist;
+     Graph(int _n):n(_n) {
            assert(n>0); 
            g.assign(n,{});      
            pa.resize(n, -1);
@@ -112,6 +112,7 @@ struct Graph{
              }
          }
       end[v]=int(order.size())-1 ;
+      end_order.pb(v);
   }
   void dfs_v(int v){
        if (pos[v] == -1) {
@@ -130,11 +131,15 @@ struct Graph{
       assert(u<n && v<n && u>=0 && v>=0);
          g[u].push_back(v);
   }
-
+ 
 };
+ 
+ 
+
+
+
+
 // lca
-
-
 struct LCA{
   int n ,Log;
   vector<int> dis ;
