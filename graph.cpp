@@ -1,5 +1,5 @@
 
-art bri     
+artpoint bridge 
 struct graph{
       int n,attempt;
       vector<vector<int>> g;
@@ -79,130 +79,7 @@ struct graph{
          g[u].push_back(v);
   }
 
-};
-// dfs scc 
- 
-struct Graph{
-      int n,attempt=0;
-      vector<vector<int>> g;
-      vector<int>pa,was,pos,end,order,end_order, root,sz,dist;
-     Graph(int _n):n(_n) {
-           assert(n>0); 
-           g.assign(n,{});      
-           pa.resize(n, -1);
-           pos.resize(n,-1);
-           end.resize(n,-1);
-           sz.resize(n, 0);
-           root.resize(n, -1);
-           dist.resize(n);
-           was.resize(n, -1);
-     }
-  void dfs(int v){
-    was[v] = attempt; 
-     pos[v]=int(order.size()) ;
-         order.push_back(v);
-         sz[v]=1;
-         for(auto to: g[v]){
-             if(pos[to]==-1){
-                pa[to]=v;
-                dist[to]=dist[v]+1;
-                root[to]=(root[v]!= -1?root[v] : to);
-                dfs(to);
-                sz[v]+=sz[to];
-             }
-         }
-      end[v]=int(order.size())-1 ;
-      end_order.pb(v);
-  }
-  void dfs_v(int v){
-       if (pos[v] == -1) {
-          ++attempt;dist[v] = 0;
-          root[v] = v;pa[v] = -1;
-          dfs(v);
-      }
-  }
-  void dfs_all() {
-    for (int v = 0; v < n; v++) {
-         dfs_v(v);
-    }
-    assert((int) order.size() == n);
-  }
-  void add(int u,int v){
-      assert(u<n && v<n && u>=0 && v>=0);
-         g[u].push_back(v);
-  }
- 
-};
- 
- struct Graph{
-      int n,attempt=0;
-      vector<vector<int>> g;
-      vector<int>pa,was,pos,end,order,end_order, root,sz,dist;
-     Graph(int _n):n(_n) {
-           Resize(); 
-           g.assign(n,{});      
-      }
-     void Resize(){
-           assert(n>0);
-           pa.resize(n, -1);
-           pos.resize(n,-1);
-           end.resize(n,-1);
-           sz.resize(n, 0);
-           root.resize(n, -1);
-           dist.resize(n);
-           was.resize(n, -1);
-    
-    }
-    void Clear(){
-          pa.clear();attempt=0;
-           pos.clear();
-           end.clear();
-           sz.clear();
-           root.clear();
-           dist.clear();
-           was.clear();
-          order.clear();
-          end_order.clear();
-    }
-    void dfs(int v){
-     was[v] = attempt; 
-      pos[v]=int(order.size()) ;
-         order.push_back(v);
-         sz[v]=1;
-         for(auto to: g[v]){
-             if(pos[to]==-1){
-                pa[to]=v;
-                dist[to]=dist[v]+1;
-                root[to]=(root[v]!= -1?root[v] : to);
-                dfs(to);
-                sz[v]+=sz[to];
-             }
-         }
-      end[v]=int(order.size())-1 ;
-      end_order.pb(v);
-  }
-  void dfs_v(int v){
-       if (pos[v] == -1) {
-          ++attempt;dist[v] = 0;
-          root[v] = v;pa[v] = -1;
-          dfs(v);
-      }
-  }
-  void dfs_all() {
-    for (int v = 0; v < n; v++) {
-         dfs_v(v);
-    }
-    assert((int) order.size() == n);
-  }
-  void add(int u,int v){
-      assert(u<n && v<n && u>=0 && v>=0);
-         g[u].push_back(v);
-  }
- 
-};
- 
-
-
+}; 
 
 
 // lca
@@ -256,7 +133,7 @@ struct LCA{
 
 };
 
-pair<vi,vi>  DFS(const vvi &G ,const vi&order){
+void  DFS(const vvi &G ,const vi&order){
    int n=sz(G),attempt=0 ;
    vi pa(n,-1),was(n,-1),pos(n,-1),end(n,-1);
    vi ord,root(n,-1),Sz(n),dist(n),e_ord;   
@@ -286,6 +163,6 @@ pair<vi,vi>  DFS(const vvi &G ,const vi&order){
           dfs(dfs, v);
         }
      }
-    reverse(all(e_ord));
-  return make_pair(e_ord,was);
+    
+  return ;
 }
