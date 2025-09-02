@@ -1,21 +1,23 @@
 
 template <class T, T (*op)(T, T), T (*e)()> 
 struct segtree {
-  int n,size,log;
+  int n,size;
   vector<T> d;
   segtree(const vector<T>& v){
-     n=sz(v);
-      size=1,log=1; while(size<n)size<<=1,log++;
+      n=sz(v),size=1; 
+      while(size<n)size<<=1;
       
         d=vector<T>(2 * size, e());
         rep(i,n)d[size + i] = v[i];
         repr(i,size - 1,1) update(i);
     }
-    void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
+    void update(int k) { 
+      d[k] = op(d[2 * k], d[2 * k + 1]); 
+    }
     void set(int p, T x) {
         assert(0 <= p && p < n);
         p += size;  d[p] = x;
-        rep1(i,1,log)update(p >> i);
+        while(p)update(p >>=1);
     }
     T prod(int l, int r) const {
       assert(0 <= l && l <= r && r <= n);
@@ -27,6 +29,7 @@ struct segtree {
         return op(sml, smr);
     }
 };
+
 // l 0 base r 1 base 
 ll op(ll x ,ll y){
    return x+y;
@@ -34,7 +37,6 @@ ll op(ll x ,ll y){
 ll e(){
    return 0ll ;
 }
-
 
 
 
