@@ -1,10 +1,9 @@
- 
 template <class T, T (*op)(T, T), T (*e)()> 
 struct segtree {
   int n,size;
   vector<T> d;
   segtree(const vector<T>& v){
-      n=int(v.size()), size=1; 
+      n=int(v.size()),size=1; 
       while(size<n)size<<=1;
       
         d=vector<T>(2 * size, e());
@@ -17,9 +16,9 @@ struct segtree {
     void set(int p, T x) {
         assert(0 <= p && p < n);
         p += size;  d[p] = x;
-        while(p> 1 )update(p >>=1);
+        while(p > 1)update(p >>=1);
     }
-    T prod(int l, int r) const {
+    T prod(int l, int r) const { // [l,r)
       assert(0 <= l && l <= r && r <= n);
         T sml = e(), smr = e();
         for(l += size ,r += size ; l<r ;  l>>=1,r>>=1 ){
@@ -30,13 +29,15 @@ struct segtree {
     }
 };
 
-// l 0 base r 1 base 
 ll op(ll x ,ll y){
    return x+y;
 }
 ll e(){
    return 0ll ;
 }
+
+
+
 
 struct Node{
      
