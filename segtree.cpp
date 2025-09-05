@@ -17,7 +17,7 @@ struct segtree {
     void set(int p, T x) {
         assert(0 <= p && p < n);
         p += size;  d[p] = x;
-        while(p)update(p >>=1);
+        while(p> 1 )update(p >>=1);
     }
     T prod(int l, int r) const {
       assert(0 <= l && l <= r && r <= n);
