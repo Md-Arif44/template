@@ -102,7 +102,7 @@ const int dy[] = {0, 0, 1, -1, 1, -1, 1, -1};
  
 constexpr int Pct(ll x){return __builtin_popcountll(x);}  
 constexpr int Msb(ll x){return int(log2(x));}  
-constexpr __int128_t P2(ll x) { return __int128_t(1) << x; }
+constexpr ll P2(ll x) { return 1ll << x; }
 constexpr ll Msk2(ll x) { return P2(x) - 1;}
 constexpr ll Lsb(ll x) { return  x&~(x-1);}
 constexpr  bool Is_set(ll x,ll j) { return  (x&(1ll<<j) )==(1ll<<j);}
