@@ -1,5 +1,4 @@
 /*
-
 #include<bits/stdc++.h>
 using namespace std;
 #include <ext/pb_ds/assoc_container.hpp>
@@ -8,17 +7,12 @@ using namespace __gnu_pbds;
 template<class T>using ordered_set=tree<T, null_type, less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 template<class T>using ordered_multiset=tree<T, null_type,less_equal<T>, rb_tree_tag,tree_order_statistics_node_update>;
 
-/**
- * PBDS Tips:
- * - less<T>         : Sorted set (asc)
- * - less_equal<T>   : Multiset (asc)
- * - greater<T>      : Sorted set (desc)
- * - greater_equal<T>: Multiset (desc)
- *
- * name.order_of_key(k)  -> Count of elements < k
- * *name.find_by_order(k)-> k-th smallest element (0-indexed)
-*/
 
+ 
+ //name.order_of_key(k)  -> Count of elements < k
+ // *name.find_by_order(k)-> k-th smallest element (0-indexed)
+
+ 
 */
 #include <algorithm>
 #include <array>
@@ -99,9 +93,9 @@ Tct using  PQ1 =PQ<T,V<T>,greater<T>>;
  
 const int dx[] = {1, -1, 0, 0, 1, 1, -1, -1};  
 const int dy[] = {0, 0, 1, -1, 1, -1, 1, -1};  
- 
 constexpr int Pct(ll x){return __builtin_popcountll(x);}  
-constexpr int Msb(ll x){return int(log2(x));}  
+constexpr int Msb(int x){return 31 - __builtin_clz(x); }
+constexpr int Msb(ll x){return 63 - __builtin_clzll(x);}
 constexpr ll P2(ll x) { return 1ll << x; }
 constexpr ll Msk2(ll x) { return P2(x) - 1;}
 constexpr ll Lsb(ll x) { return  x&~(x-1);}
