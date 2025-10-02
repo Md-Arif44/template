@@ -211,8 +211,8 @@ struct lazy_segtree {
 };
  
 
- *** Assignment and Sum  
-{
+[[ Assignment and Sum ]]   
+
 using S = pll  ;
 using F = ll ;
 S op( S a,S b) {
@@ -231,10 +231,9 @@ F Com(ll f, ll g) {
 F id() {
     return -1 ;
 }
-}
 
- **** Addition and Sum
-{
+
+[[ Addition and Sum ]] 
 
 using S = pll  ;
 using F = ll ;
@@ -255,13 +254,4 @@ F id() {
 }
  
  
-}
 
-
-
-
-
-
-
-
-*/
