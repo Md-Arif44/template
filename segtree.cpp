@@ -210,6 +210,32 @@ struct lazy_segtree {
     }
 };
  
+
+ *** Assignment and Sum  
+{
+using S = pll  ;
+using F = ll ;
+S op( S a,S b) {
+    return {a.ff+b.ff,a.ss+b.ss} ;
+}
+S e() {
+    return  {0,0};
+}
+S Map(ll f, S x) {
+     if(f==-1)return  x;
+     else return {f*x.ss ,x.ss};
+ }
+F Com(ll f, ll g) {
+    return  f==-1?g:f ;
+}
+F id() {
+    return -1 ;
+}
+}
+
+ **** Addition and Sum
+{
+
 using S = pll  ;
 using F = ll ;
 S op( S a,S b) {
@@ -228,3 +254,14 @@ F id() {
     return 0;
 }
  
+ 
+}
+
+
+
+
+
+
+
+
+*/
