@@ -88,7 +88,7 @@ struct LCA{
   vector<int> dis ;
   vector<vector<int>>g,up;
   LCA(int n):n(n){
-      Log=Msb(n) +1;
+      Log= 32 - __builtin_clz(n); 
       up.resize(n,vector<int>(Log)); 
       g.assign(n,{}); dis.resize(n);
   }
