@@ -221,11 +221,11 @@ S op( S a,S b) {
 S e() {
     return  {0,0};
 }
-S Map(ll f, S x) {
+S Map(F f, S x) {
      if(f==-1)return  x;
      else return {f*x.ss ,x.ss};
  }
-F Com(ll f, ll g) {
+F Com(F f, F  g) {
     return  f==-1?g:f ;
 }
 F id() {
@@ -243,10 +243,10 @@ S op( S a,S b) {
 S e() {
     return  {0,0};
 }
-S Map(ll f, S x) {
+S Map(F f, S x) {
     return   {x.ff + (x.ss*f ) ,x.ss}  ;
 }
-F Com(ll f, ll g) {
+F Com(F f, F g) {
     return  f+g ;
 }
 F id() {
