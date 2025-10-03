@@ -36,19 +36,35 @@ template<class T>using ordered_multiset=tree<T, null_type,less_equal<T>, rb_tree
 #include <vector>
 using namespace std;
  
+#define TT template <typename T
+TT,typename=void> struct cerrok:false_type {};
+TT> struct cerrok <T, void_t<decltype(cerr << declval<T>() )>> : true_type {};
 
+TT> constexpr void p1 (const T &x);
+TT, typename V> void p1(const pair<T, V> &x) {
+  cerr << "{"; p1(x.first); cerr << ", "; 
+  p1(x.second); cerr << "}"; 
+}
+TT> constexpr void p1 (const T &x) {
+  if constexpr (cerrok<T>::value) cerr << x;
+  else { int f = 0; cerr << '{';
+    for (auto &i: x) 
+      cerr << (f++ ? ", " : ""), p1(i);
+    cerr << "}";
+} }
+void p2() { cerr << "]\n"; }
+TT, typename... V> void p2(T t, V... v) {
+  p1(t);
+  if (sizeof...(v)) cerr << ", ";
+  p2(v...);
+}
 
-template<typename A, typename B> ostream& operator<<(ostream &os, const pair<A, B> &p) { return os << '(' << p.first << ", " << p.second << ')'; }
-template<typename... Args> ostream& operator<<(ostream& os, const tuple<Args...>& t) { os << '('; apply([&os](const Args&... args) { size_t n = 0; ((os << args << (++n != sizeof...(Args) ? ", " : "")), ...); }, t); return os << ')'; }
-template<typename T_container, typename T = typename enable_if<!is_same<T_container, string>::value, typename T_container::value_type>::type> ostream& operator<<(ostream &os, const T_container &v) { os << '{'; string sep; for (const T &x : v) os << sep << x, sep = ", "; return os << '}'; }
-void dbg_out() { cerr << endl; }
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
 #ifndef ONLINE_JUDGE 
-#define dbg(...) cerr << '[' << __LINE__ << "] (" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#define dbg(x...) {cerr <<" \e[93m"<<__func__<<":"<<__LINE__<<" [" << #x << "] = ["; p2(x); cerr << "\e[0m";}
 #else
 #define dbg(...)
 #endif
- 
+
 #define Tct   template<typename T>
 #define Tctu  template<typename T,typename U>
 #define clr(cnt, x) memset((cnt), (x), sizeof(cnt))
