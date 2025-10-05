@@ -182,7 +182,39 @@ struct Trie{
   }  
 };
 
-
+using TY=  int  ;
+using Mat=vector<vector<TY>> ;
+ 
+Mat operator*(const Mat& a, const Mat& b) {
+  if (a.empty() || b.empty())return {{}};
+  
+  Mat c(sz(a) , V<TY>(sz(b[0])) );
+ 
+  rep(i,sz(c)){
+    rep(j,sz(c[0])) {
+      c[i][j] = 0;
+      rep(k,sz(b)) {
+        c[i][j] += a[i][k] * b[k][j];
+      }
+    }
+  }
+  return c;
+}
+ 
+Mat &operator*=(Mat &a, const Mat& b) {
+  return a = a * b;
+}
+ 
+Mat power(Mat a,  ll b) {
+  assert(b >= 0);
+  Mat res(sz(a),V<TY>(sz(a[0])) );
+ 
+  rep(i,sz(a))res[i][i] = 1;
+   
+  for(;b;a*=a,b>>=1)if(b&1)res*=a;
+  
+  return res;
+}
 
 #include<bits/stdc++.h>
 using namespace std;
