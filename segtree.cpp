@@ -73,7 +73,7 @@ struct lazy_segtree {
         return d[p];
     }
  
-    S prod(int l, int r) {
+    S prod(int l, int r) { // [l,r)
         assert(0 <= l && l <= r && r <= _n);
         if (l == r) return e();
  
@@ -105,7 +105,7 @@ struct lazy_segtree {
         d[p] = Map(f, d[p]);
         for (int i = 1; i <= log; i++) update(p >> i);
     }
-    void apply(int l, int r, F f) {
+    void apply(int l, int r, F f) { // [l,r)
         assert(0 <= l && l <= r && r <= _n);
         if (l == r) return;
  
