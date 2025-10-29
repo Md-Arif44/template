@@ -9,7 +9,7 @@ struct FT {
     for (; k > 0; k &= k-1) s += x[k];
     return s;
   }
-  T sum(int l,int r ) { // [l,r) 
+  T rsum(int l,int r ) { // [l,r) 
     return sum(r) - sum(l) ;}
 };
 
