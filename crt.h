@@ -46,7 +46,8 @@ ll crt(ll a, ll m, ll b, ll n) {
 const ll mod = 1e9+7; // change to something else
 struct Mint {
   ll x;
-  Mint(ll xx) : x(xx) {}
+  Mint() : x(0){}
+  Mint(ll x_):x(x_ % mod){if (x < 0) x += mod;}
   Mint operator+(Mint b) { return Mint((x + b.x) % mod); }
   Mint operator-(Mint b) { return Mint((x - b.x + mod) % mod); }
   Mint operator*(Mint b) { return Mint((x * b.x) % mod); }
@@ -61,3 +62,18 @@ struct Mint {
     return e&1 ? *this * r : r;
   }
 };
+
+vector<Mint> fact(1, 1);
+ vector<Mint> inv_fact(1, 1);
+ 
+ Mint C(int n, int k) {
+  if (k < 0 || k > n) return 0;
+  
+  while ((int) fact.size() < n + 1) {
+    fact.push_back(fact.back() * (int) fact.size());
+    inv_fact.push_back( Mint(1) / fact.back());
+  }
+  return fact[n] * inv_fact[k] * inv_fact[n - k];
+
+}
+
