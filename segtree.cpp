@@ -47,7 +47,8 @@ template <class S,
           F (*Com)(F, F),
           F (*id)()>
 struct lazy_segtree {
- 
+
+    lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
     lazy_segtree(const std::vector<S>& v) : _n(int(v.size())) {  
         size = 1 ;while(size<_n)size*=2 ;
         log = 31 - __builtin_clz(size); 
