@@ -8,6 +8,7 @@ ll euclid(ll a, ll b, ll &x, ll &y) {
 /// Find (&g) = gcd(a, b)
 /// Find (&x, &y) satisfy ax + by = c
 // for many solution  (x0 = x0+ k*b/g ) and (y0 = y0- k* a/g)  k is  a integer 
+// if c%gcd(a,b)==0  there always sol its works on multiple    c% gcd(a,b,d,e,f)== 0
 bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) {
     g = euclid (abs(a), abs(b), x0, y0);
     if (c % g) return false;
