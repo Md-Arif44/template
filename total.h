@@ -338,6 +338,43 @@ vector<Mint> fact(1, 1), inv_fact(1, 1);
   return fact[n] * inv_fact[k] * inv_fact[n - k];
 
 }
+
+//seive 
+int preclc = 1;
+vector<int> least= {0,1},primes;
+void RunSieve(int n) {
+  n = max(n, 1);
+  least.assign(n + 1, 0);
+  primes.clear();
+  for (int i = 2; i <= n; i++) {
+    if (least[i] == 0) {
+        least[i] = i;
+      primes.push_back(i);
+    }
+    for (int x : primes) {
+      if (x > least[i] || i * x > n) {
+        break;
+      }
+      least[i * x] = x;
+    }
+  }
+  preclc = n;
+}
+vector<pii > Factorize(int  n) {
+       assert (n <= preclc)  ;
+       
+        vector<pii > ret;
+        while (n > 1) {
+          if (!ret.empty() && ret.back().first == least[n]) {
+            ret.back().second++;
+          } else {
+            ret.emplace_back(least[n], 1);
+          }
+          n /= least[n];
+        }
+    return ret;
+}
+/----------------------------/
 // fast factor 
 
 // works in sqrt(sqrt(n)) 
